@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="This webpage requires Web3 for full functionality.">
+    
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="libs/angular-includes/angular-material-1.1.0.min.css">
+    <link rel="stylesheet" href="libs/googleapis-fonts/material-icons.css">
+    <link rel="stylesheet" href="libs/googleapis-fonts/roboto.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="directives/sidenav/sidenavDirective.css">
+    <link rel="stylesheet" href="directives/fullscreenimage/fullscreenimageDirective.css">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    
+    <title>ChicoBitcoinJoe - Joseph B Reed</title>
+    
+</head>
+<body ng-app="app" layout="row">
+    <span hide show-lg hide-gt-lg style="min-width:10vw !important"></span>
+    <span hide show-gt-lg style="min-width:20vw !important"></span>
+    <div layout="row" flex>
+        <md-sidenav md-component-id="left" md-is-locked-open="$mdMedia('min-width: 740px')">
+            <sidenav></sidenav>
+        </md-sidenav>
+        <div id="currentView" layout="row" style="overflow:scroll;">
+            <div ng-view></div>
+            <span hide show-lg hide-gt-lg style="min-width:10vw !important"></span>
+            <span hide show-gt-lg style="min-width:20vw !important"></span>
+        </div>
+    </div>
+    
+    <!-- Jquery -->
+    <script src="libs/jquery-3.1.1.js"></script>
+    
+    <!-- Angular + Material Libraries -->
+    <script src="libs/angular-includes/angular-1.5.5.min.js"></script>
+    <script src="libs/angular-includes/angular-animate-1.5.5.min.js"></script>
+    <script src="libs/angular-includes/angular-aria-1.5.5.min.js"></script>
+    <script src="libs/angular-includes/angular-material-1.1.0.min.js"></script>
+    <script src="libs/angular-includes/angular-messages-1.5.5.min.js"></script>
+    <script src="libs/angular-includes/angular-route-1.5.5.min.js"></script>
+    <script src="libs/angular-includes/angular-svg-assets-cache.js"></script>
+    <script src="libs/angular-includes/angular-sanitize-1.6.2.js"></script>
+    
+    <!-- Other Libraries -->
+    <script src="libs/web3/web3.js"></script>
+            
+    <!-- Application Files  -->
+    <script src="app.js"></script>
+    
+    <!-- Services -->
+    <script src="services/Web3Service.js"></script>
+    <script src="services/SimpleITO.js"></script>
+
+    <!-- Views -->
+    <script src="views/home/homeViewController.js"></script>
+    
+    <!-- Directives -->
+    <script src="directives/sidenav/sidenavDirective.js"></script>
+    <script src="directives/fullscreenimage/fullscreenimageDirective.js"></script>
+    <script src="directives/timer/timerDirective.js"></script>
+            
+</body>
+</html>

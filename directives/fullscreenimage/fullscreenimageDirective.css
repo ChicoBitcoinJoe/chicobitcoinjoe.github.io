@@ -1,0 +1,38 @@
+img {
+    max-width: 100%;
+}
+
+.animate {
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -ms-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+
+.zoom {
+    cursor: -webkit-zoom-in;
+    cursor: zoom-in;
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 100;
+}
+
+.overlay.show {
+    background-color: rgba(0, 0, 0, .67);
+}
+
+.overlay img {
+    cursor: -webkit-zoom-out;
+    cursor: zoom-out;
+    position: fixed;
+    transform-origin: 0% 0%;
+    z-index: 3;
+}

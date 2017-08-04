@@ -1,0 +1,335 @@
+<div id="top" layout="column">
+    <div id="about-container">
+        <div class="screenLessThan740px" style="position:absolute; top:25px; right:5px; z-index:9001 !important;">
+            <div class="menu-button">
+                <md-button class="md-icon-button" ng-click="toggle('left')" aria-label="toggle menu">
+                    <md-icon style="color:rgba(255,255,255,0.87); margin: 0px;" md-svg-icon="img/icons/menu.svg"></md-icon>
+                </md-button>
+            </div>
+        </div> 
+        <div id="about">
+             <md-card class="no-box-shadow">
+                <md-card-content layout="column" layout-align="center top" layout-align="space-between">
+                    <span layout-sm="column" layout-xs="column">
+                        <div id="contact-container" flex-sm>
+                            <div layout="column" layout-padding="5" layout-sm="row">
+                                <div layout layout-align="center top">
+                                    <div class="md-media-xl card-media" style="overflow:hidden" >
+                                        <img class="zoom animate" style="width:100%; height:auto;" src="images/me.jpg">
+                                    </div>
+                                </div>
+                                <div style="font-size:small;" layout="column" layout-align="top center" layout-padding="1" flex>
+                                    <h2>Joseph B. Reed</h2>
+                                    <h4>Contact Me</h4>
+                                    <div style="min-width:220px;">
+                                        <a ng-href="mailto:chicobitcoinjoe@gmail.com" target="_blank"><span style="margin-bottom:5px;" layout="row">email <span flex></span>  chicobitcoinjoe@gmail.com</span></a>
+                                        <a href="https://github.com/ChicoBitcoinJoe" target="_blank"><span style="margin-bottom:5px;" layout="row">github.com/ <span flex></span> ChicoBitcoinJoe</span></a>
+                                        <a href="https://www.reddit.com/user/ChicoBitcoinJoe/" target="_blank"><span style="margin-bottom:5px;" layout="row">reddit.com/user/ <span flex></span> ChicoBitcoinJoe</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top:15px; border-top: 3px solid rgba(255,255,255,0.87); border-bottom: 3px solid rgba(255,255,255,0.87);" layout="row" layout-align="center" flex>
+                            <h2>About Me</h2>
+                        </div>
+                        <p layout="row" layout-align="center center" flex>
+                            <span style="margin:45px; text-align:center"><i>"Most of the good programmers do programming not because they expect to get paid or get adulation by the public, but because it is fun to program."</i> - Linus Torvalds</span>
+                        </p>
+                        <p>
+                             In 2013 I discovered cryptocurrencies and the idea of permissionless innovation and the ethos of decentralization and open source. After an intense dive down the rabbit hole, I decided to flex my entrepreneurial spirit and join thousands of others in one of worlds fastest growing industries: Cryptocurrency. My goal in financial technology is to create permissionless platforms for people all over the world to better their lives with. 
+                        </p>
+                        <p>
+                            I am educated in C++, Java, and Android development as well as self taught in AngularJS and Solidity. I offer several services including consulting, debugging, and prototyping.
+                        </p>
+                    </span>
+                </md-card-content>
+            </md-card>
+        </div>
+    </div>
+    <div id="portfolio" layout="column" layout-padding>
+        <div style="margin-top:10px; border-top: 3px solid rgba(255,255,255,0.87); border-bottom: 3px solid rgba(255,255,255,0.87);" layout="row" layout-align="center" flex>
+            <h2>Portfolio</h2>
+        </div>
+        <div style="text-align:justify;" layout="column" layout-align="space-between">
+            <span layout-sm="column" layout-xs="column">
+                <div id="contact-container" style="margin:15px;margin-bottom:5px;" flex-sm flex-gt-sm="55">
+                    <div class="card-media" layout="column">
+                        <img class="zoom animate" src="images/medao-preview1.jpg" flex>
+                    </div>
+                </div>
+                <h1 layout="row" layout-align="center center" flex>MeDao<small>&nbsp(alpha)</small></h1>
+                <div layout="row" layout-xs="column" layout-margin>
+                    <md-button href="http://medao.azurewebsites.net/" class="project-button md-raised md-primary" flex>Website</md-button>
+                    <md-button href="https://github.com/ChicoBitcoinJoe/MeDao" class="project-button md-raised" style="background-color:rgba(133,133,133,0.33)" flex>Github</md-button>
+                    <md-button class="md-raised" style="text-transform:lowercase;" flex>Whitepaper</md-button>
+                </div>
+                <p>
+                    The MeDao platform enables any person to find a free market value for their own time as well as allow anyone in the world to gain exposure to the value of that person's time. Every MeDao comes with a MiniMe Token which keeps track of how much time is owed to each holder as well as the capabality to create a snapshot at any point in the tokens history. This comes with many benefits such as easy upgrading of MeDao features, it creates new ways of delivering value to shareholders, and allows for a more graceful recovery in the event of a critical hack or bug.
+                </p>
+                <div layout="row" flex>
+                    <md-button class="project-button" ng-show="!showMoreMeDao" ng-click="showMoreMeDao = true;" style="background-color:rgba(255,255,255,0.05)" flex> - learn more - </md-button>
+                </div>
+                <div ng-show="showMoreMeDao">
+                    <p>
+                        Once a week the MeDao Founder can receive up to 40 hours worth of tokens. Intrinsically, a single token is worth 1 second of time. Meaning, 1 hours worth of the Founder's tokens can be redeemed for 1 hour of a service they offer. Time does not have to be redeemed immediately and can be saved for later use. This is particularly useful if one believes the Founder's time might be more valuable in the future. An optional burn function is provided for people to make payments to the MeDao thus showing proof of work done by the MeDao Founder.
+                    </p>
+                    <code layout layout-margin layout-padding>
+                        A simple use case for a MeDao could look as follows: A music artist sells 40 hours of his time each week to his fans. This gives the Founder a basic income they can rely on while he creates his music. The artist promises the following to those who hold his time: I will create a snapshot of the token distribution every time I release a song. Profit generated from selling copies of the song go directly to a contract where, at any point, a token holder can exchange their snapshot tokens for an equal distribution of profits held by the contract. Assuming there is demand for the artists song, the token will be traded on an exchange where the value of the token is equal to the current profits held by the contract plus a premium equal to the potential future profits of that song. Better songs will earn more profit and thus have a higher exchange rate. The artists basic income will also increase as the demand for his time increases. 
+                        <br><br>
+                        It is possible through "value added" that a Founder's time becomes too expensive and no one will want to claim any literal time with the Founder. This is natural and means the artist's time is better spent making music instead of something like teaching music lessons. Alternatively, the Founder can choose to give a discount on their literal time by accepting a fraction of a token hour in exchange for a real hour.
+                    </code>
+                    <p>
+                         In the future, MeDao can evolve to use things like Bancor (liquidity as a service) and TokenCard (erc20 token debit card) to create a personal debit/credit card. Shareholders could set a card max and minimum payment. If the MeDao Founder fails to show proof of work the max would decrease until they are caught up. If their proof of work get's too low their exchange rate would suffer and thus their hourly wage as well.
+                    </p>
+                </div>
+            </span>
+        </div>
+        
+        <md-divider style="border-color:rgba(255,255,255,0.87); margin:20px 0px;"></md-divider>
+        
+        <div style="text-align:justify;" layout="column" layout-align="space-between">
+            <span layout-sm="column" layout-xs="column">
+                <div style="float:right; margin:15px;margin-bottom:5px;" flex-sm flex-gt-sm="55">
+                    <div class="card-media" layout="column">
+                        <img class="zoom animate" src="images/community_screenshot.png" flex>
+                    </div>
+                </div>
+                <h1 layout="row" layout-align="center center" flex>Community<small>&nbsp(alpha)</small></h1>
+                <div layout="row" layout-xs="column" layout-margin>
+                    <md-button class="project-button md-raised md-primary" flex>Website</md-button>
+                    <md-button href="https://github.com/ChicoBitcoinJoe/Community" class="project-button md-raised" style="background-color:rgba(133,133,133,0.33)" flex>Github</md-button>
+                    <md-button class="md-raised" style="text-transform:lowercase;" flex>Whitepaper</md-button>
+                </div>
+                <p>
+                    Community is a decentralized social media platform similar to Reddit but with a few unique features you can't find in traditional social media websites. The current paradigm of centralized networks, top down moderation, and mass data collection, inevitably lead to censorship and questionable business practices. The arrival of decentralized consensus systems provides a road to a world with unparalleled transparency and features while still providing the quality content and seamless user experience expected of a centralized service.
+                </p>
+                <div layout="row" flex>
+                    <md-button class="project-button" ng-show="!showMoreCommunity" ng-click="showMoreCommunity = true;" style="background-color:rgba(255,255,255,0.05)" flex> - learn more - </md-button>
+                </div>
+                <div ng-show="showMoreCommunity">
+                    <p>
+                        Non-traditional features included in Community are:
+                    </p>
+                    <ul>
+                        <li><b>AutoModeration</b> - The next generation of algorithm based moderation with complete transparency and economic incentives</li>
+                        <li><b>Ad Free</b> - Nothing on the screen but what you choose.</li>
+                        <li><b>Private</b> - Your personal information is never shared or sold to third parties</li>
+                        <li><b>Sybil/Brigade Resistance</b> - The people you interact with have a legitamate stake in what they are saying.</li>
+                        <li><b>Decentralized</b> - Never be censored by a rogue moderator or autofilter again</li>
+                        <li>and much more planned for the future!</li>
+                    </ul>
+                </div>
+            </span>
+        </div>
+    </div>
+    <div id="services" layout="column" layout-padding>
+        <div style="margin-top:10px; border-top: 3px solid rgba(255,255,255,0.87); border-bottom: 3px solid rgba(255,255,255,0.87);" layout="row" layout-align="center" flex>
+            <h2>Services</h2>
+        </div>
+        <div layout="column">
+            <h3>Prototyping</h3>
+            <p>
+                If you have an idea for a decentralized application (dapp) I can quickly design single or multi page websites coded in AngularJS complete with custom smart contracts written in Solidity. A specification must be provided so I can estimate the cost which depends on the complexity of the dapp. I can provide example dapps of varying complexities and price points to use as a reference.
+            </p>
+            <h3>Consulting</h3>
+            <p>
+                Creating or integrating a business with a cryptocurrencies can be intimidating. I can help ease the process of understanding cryptocurrencies and to give you enough knowledge to have confidence in your decisions. If you are wondering if a MeDao is a good fit for your profession get in contact with me and we can dive into the details of the pros and cons of a MeDao and how they might apply to you.
+            </p>
+            <h3>Debugging</h3>
+            <p>
+                Bugs are everywhere! I can debug and test any contract written in solidity and give you a little extra piece of mind.
+            </p>
+        </div>
+    </div>
+    <div id="invest" layout="column" layout-padding>
+        <div style="margin-top:10px; border-top: 3px solid rgba(255,255,255,0.87); border-bottom: 3px solid rgba(255,255,255,0.87);" layout="row" layout-align="center" flex>
+            <h2>Invest</h2>
+        </div>
+        <div layout="column" layout-gt-xs="row">
+            <div layout="column" layout-align="center center" flex-gt-xs="50"> 
+                <h3>MeDao</h3>
+                <div>
+                    <md-button class="project-button md-raised md-primary" ng-click="showOffering = 'medao'">invest</md-button>
+                </div>
+                <small layout layout-padding><i>*ongoing*</i></small>
+            </div>
+            <div layout="column" layout-align="center center" flex-gt-xs="50">
+                <h3 style="text-align:center;">Chico Bitcoin Joe</h3>
+                <div>
+                    <md-button class="project-button md-raised md-primary" style="color:rgba(255,255,255,0.5) !important" ng-disabled="true">invest</md-button>
+                </div>
+                <small layout layout-padding><i>*coming ~2018*</i></small>
+            </div>
+        </div>
+    </div>
+        
+    <md-divider style="border-color:rgba(255,255,255,0.87); margin:20px 0px;"></md-divider>
+
+    <div ng-show="showOffering == null" layout="column" layout-align="center center" layout-margin>
+        <p>
+            Click on an option above to purchase tokens.
+        </p>
+    </div>
+    <div ng-show="showOffering == 'medao'" layout="column">
+        <div layout="column" layout-padding>
+            <h2>MeDao Initial Token Offering</h2>
+            <div layout="column" style="text-align:justify;">
+                <p>You can deposit ether up until the deposit period ends and also withdraw any deposited ether up until the withdraw period ends. An optional commit function is provided to lock in your ether so they are no longer able to be withdrawn. This lets participants in the token offering calculate a minimum price per token. After the withdraw period ends all tokens become committed so make sure to withdraw before that time if you want to keep your ether! Tokens are distributed proportionally based on ether deposited. If you deposited 1% of the total ether than you will receive 1% of the token distribution.</p>
+            </div>
+        </div>
+        <div ng-hide="state.secondsUntilOfferStarts < 0" style="background-color:rgba(255,255,255,0.05)" layout="column" layout-gt-sm="row" layout-padding flex-gt-sm>
+            <span flex-gt-sm="25"></span>
+            <h2 layout="row" flex="50">
+                <b>Offer Starts</b>
+                <span flex></span>
+                <div>
+                    <timer seconds="state.secondsUntilOfferStarts"></timer>
+                </div>
+            </h2>
+            <span flex-gt-sm="25"></span>
+        </div>
+        <div style="background-color:rgba(0,0,0,0.05)" layout="column" layout-gt-sm="row" layout-padding flex-gt-sm>
+            <div layout="row" flex="50">
+                <b>Offer Expires</b>
+                <span flex></span>
+                <div>
+                    <timer seconds="state.secondsUntilOfferExpires"></timer>
+                </div>
+            </div>
+            <span flex-gt-sm="5"></span>
+            <div layout="row" flex="50">
+                <b>Withdraw Period Ends</b>
+                <span flex></span>
+                <div>
+                    <timer seconds="state.secondsUntilWithdrawExpires"></timer>
+                </div>
+            </div>
+        </div>
+        <div ng-hide="state.secondsUntilOfferStarts < 0" style="background-color:rgba(255,255,255,0.05)" layout="column" layout-gt-sm="row" layout-padding flex-gt-sm>
+            <div layout="row" flex="50">
+                <b>Ether Goal</b>
+                <span flex></span>
+                <div>1000 <small style="color:rgba(255,255,255,0.67)">eth</small></div>
+            </div>
+            <span flex-gt-sm="5"></span>
+            <div layout="row" flex="50">
+                <b>Total Ether Deposited</b>
+                <span flex></span>
+                <div>{{state.ito.totalEther | fromWei:'ether' | decimals:0}} <small style="color:rgba(255,255,255,0.67)">eth</small></div>
+            </div>
+        </div>
+        <div style="background-color:rgba(0,0,0,0.05)" layout="column" layout-gt-sm="row" layout-padding flex-gt-sm>
+            <div layout="row" flex="50">
+                <div>Ether Committed</div>
+                <span flex></span>
+                <div>0 <small style="color:rgba(255,255,255,0.67)">eth</small></div>
+            </div>
+            <span flex-gt-sm="5"></span>
+            <div layout="row" flex="50">
+                <div>Ether Uncommitted</div>
+                <span flex></span>
+                <div>0 <small style="color:rgba(255,255,255,0.67)">eth</small></div>
+            </div>
+        </div>
+        <div hide style="background-color:rgba(255,255,255,0.05)" layout="column" layout-gt-sm="row" layout-padding flex-gt-sm>
+            <div layout="row" flex="50">
+                <b>Converted Ether</b>
+                <span flex></span>
+                <div>{{state.ito.converted_ether | fromWei:'ether' | decimals:0}} <small style="color:rgba(255,255,255,0.67)">eth</small></div>
+            </div>
+            <span flex-gt-sm="5"></span>
+            <div layout="row" flex="50">
+                <b>Claimed Tokens</b>
+                <span flex></span>
+                <div>{{state.ito.claimed_tokens  | fromWei:'ether' | decimals:0}} <small style="color:rgba(255,255,255,0.67)">tokens</small></div>
+            </div>
+        </div>
+        <div style="background-color:rgba(255,255,255,0.05)" layout="column" layout-gt-sm="row" layout-padding flex-gt-sm>
+            <div layout="row" flex="50">
+                <b>Max Token Supply</b>
+                <span flex></span>
+                <b>{{state.ito.MAX_TOKEN_SUPPLY | fromWei:'ether' | decimals:0}} <small style="color:rgba(255,255,255,0.67)">tokens</small></b>
+            </div>
+            <span flex-gt-sm="5"></span>
+            <div  layout="row" flex="50">
+                <b>Your Token Claim</b>
+                <span flex></span>
+                <b>0 <small style="color:rgba(255,255,255,0.67)">tokens</small></b>
+            </div>
+        </div>
+        <div style="background-color:rgba(0,0,0,0.05)" layout="column" layout-gt-sm="row" layout-padding flex-gt-sm>
+            <div layout="row" flex="50">
+                <b>Current Token Price</b>
+                <span flex></span>
+                <div>0 <small style="color:rgba(255,255,255,0.67)">eth/token</small></div>
+            </div>
+            <span flex-gt-sm="5"></span>
+            <div layout="row" flex="50">
+                <b>Minimum Token Price</b>
+                <span flex></span>
+                <div>0 <small style="color:rgba(255,255,255,0.67)">eth/token</small></div>
+            </div>
+        </div>
+        
+        <md-divider style="border-color:rgba(255,255,255,0.87); margin:20px 0px;"></md-divider>
+        
+        <div layout="column" layout-gt-sm="row" layout-padding flex-gt-sm>
+            <div layout="row" flex="50">
+                <b>Your Balance Deposited</b>
+                <span flex></span>
+                <div>{{state.ito.uncommitted_ether | fromWei:'ether' | decimals:0}} <small style="color:rgba(255,255,255,0.67)">eth</small></div>
+            </div>
+            <span flex-gt-sm="5"></span>
+            <div layout="row" flex="50">
+                <b>Your Balance Committed</b>
+                <span flex></span>
+                <div>{{state.ito.committed_ether | fromWei:'ether' | decimals:0}} <small style="color:rgba(255,255,255,0.67)">eth</small></div>
+            </div>
+        </div>
+        <div layout="column" layout-gt-xs="row" flex-gt-xs>
+            <md-button class="project-button md-raised md-primary" flex>deposit</md-button>
+            <md-button class="project-button md-raised md-warn" flex>commit</md-button>
+            <md-button class="project-button md-raised md-warn md-hue-2" flex>deposit and commit</md-button>
+        </div>
+        <div layout="column" layout-gt-xs="row" flex-gt-xs>
+            <md-button class="md-raised" style="text-transform:lowercase;" flex="50">withdraw</md-button>
+            <md-button class="md-raised" style="text-transform:lowercase; color:rgba(255,255,255,0.5)" ng-disabled="true" flex="50">claim tokens</md-button>
+        </div>
+    </div>
+    
+    <div layout="column" layout-padding layout-margin></div>
+    
+    <div hide id="blog" layout="column" layout-padding>
+        <div style="margin-top:10px; border-top: 3px solid rgba(255,255,255,0.87); border-bottom: 3px solid rgba(255,255,255,0.87);" layout="row" layout-align="center" flex>
+            <h2>Blogs</h2>
+        </div>
+        <div layout="column" layout-padding layout-margin>
+            <ul>
+                <li>
+                    <h2>Blog #1</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam interdum scelerisque volutpat. In non faucibus ante. Nulla velit arcu, elementum quis sem at, viverra fringilla magna. Aenean varius condimentum eros. Sed aliquet pellentesque tortor quis finibus. Aliquam sed lobortis metus, non eleifend est. Nullam id luctus lorem, id fringilla sapien. Vivamus volutpat, elit eget pellentesque convallis, orci purus elementum lacus, id viverra tortor tortor vitae metus. Morbi vel pretium elit. Suspendisse eros ipsum, mollis condimentum augue faucibus, pretium vehicula lorem.</p>
+                    <p>Quisque eget iaculis ante. Vivamus laoreet consequat ipsum, a ultrices arcu aliquet vitae. Curabitur viverra a ligula nec gravida. Fusce dui sem, suscipit non vestibulum in, ornare in justo. Nam ultricies tempus blandit. Cras pulvinar erat sem, at sollicitudin magna pellentesque eget. Vestibulum dictum nisi mollis convallis dapibus. Donec nec diam molestie, rhoncus nibh a, mollis elit. Suspendisse ac semper arcu. Nullam ultrices hendrerit neque sed faucibus. Proin enim orci, dignissim quis faucibus sit amet, pretium vitae metus. Mauris facilisis, neque lobortis scelerisque rutrum, est ante viverra risus, id porttitor dui ligula et urna.</p>
+                    <p>Etiam cursus magna et leo pulvinar pellentesque. Morbi consectetur eros tortor, fermentum feugiat libero gravida eget. Vestibulum sed lobortis velit. Morbi arcu est, sollicitudin ac risus sed, tempus egestas justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras et efficitur quam. Phasellus vitae massa rhoncus purus tincidunt auctor. Vestibulum auctor libero non aliquet faucibus. Curabitur interdum metus id ante malesuada, sit amet vestibulum sem tincidunt. Nulla pretium efficitur rutrum.</p>
+                </li>
+                <li>
+                    <h2>Blog #2</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam interdum scelerisque volutpat. In non faucibus ante. Nulla velit arcu, elementum quis sem at, viverra fringilla magna. Aenean varius condimentum eros. Sed aliquet pellentesque tortor quis finibus. Aliquam sed lobortis metus, non eleifend est. Nullam id luctus lorem, id fringilla sapien. Vivamus volutpat, elit eget pellentesque convallis, orci purus elementum lacus, id viverra tortor tortor vitae metus. Morbi vel pretium elit. Suspendisse eros ipsum, mollis condimentum augue faucibus, pretium vehicula lorem.</p>
+                    <p>Quisque eget iaculis ante. Vivamus laoreet consequat ipsum, a ultrices arcu aliquet vitae. Curabitur viverra a ligula nec gravida. Fusce dui sem, suscipit non vestibulum in, ornare in justo. Nam ultricies tempus blandit. Cras pulvinar erat sem, at sollicitudin magna pellentesque eget. Vestibulum dictum nisi mollis convallis dapibus. Donec nec diam molestie, rhoncus nibh a, mollis elit. Suspendisse ac semper arcu. Nullam ultrices hendrerit neque sed faucibus. Proin enim orci, dignissim quis faucibus sit amet, pretium vitae metus. Mauris facilisis, neque lobortis scelerisque rutrum, est ante viverra risus, id porttitor dui ligula et urna.</p>
+                    <p>Etiam cursus magna et leo pulvinar pellentesque. Morbi consectetur eros tortor, fermentum feugiat libero gravida eget. Vestibulum sed lobortis velit. Morbi arcu est, sollicitudin ac risus sed, tempus egestas justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras et efficitur quam. Phasellus vitae massa rhoncus purus tincidunt auctor. Vestibulum auctor libero non aliquet faucibus. Curabitur interdum metus id ante malesuada, sit amet vestibulum sem tincidunt. Nulla pretium efficitur rutrum.</p>
+                </li>
+                <li>
+                    <h2>Blog #3</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam interdum scelerisque volutpat. In non faucibus ante. Nulla velit arcu, elementum quis sem at, viverra fringilla magna. Aenean varius condimentum eros. Sed aliquet pellentesque tortor quis finibus. Aliquam sed lobortis metus, non eleifend est. Nullam id luctus lorem, id fringilla sapien. Vivamus volutpat, elit eget pellentesque convallis, orci purus elementum lacus, id viverra tortor tortor vitae metus. Morbi vel pretium elit. Suspendisse eros ipsum, mollis condimentum augue faucibus, pretium vehicula lorem.</p>
+                    <p>Quisque eget iaculis ante. Vivamus laoreet consequat ipsum, a ultrices arcu aliquet vitae. Curabitur viverra a ligula nec gravida. Fusce dui sem, suscipit non vestibulum in, ornare in justo. Nam ultricies tempus blandit. Cras pulvinar erat sem, at sollicitudin magna pellentesque eget. Vestibulum dictum nisi mollis convallis dapibus. Donec nec diam molestie, rhoncus nibh a, mollis elit. Suspendisse ac semper arcu. Nullam ultrices hendrerit neque sed faucibus. Proin enim orci, dignissim quis faucibus sit amet, pretium vitae metus. Mauris facilisis, neque lobortis scelerisque rutrum, est ante viverra risus, id porttitor dui ligula et urna.</p>
+                    <p>Etiam cursus magna et leo pulvinar pellentesque. Morbi consectetur eros tortor, fermentum feugiat libero gravida eget. Vestibulum sed lobortis velit. Morbi arcu est, sollicitudin ac risus sed, tempus egestas justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras et efficitur quam. Phasellus vitae massa rhoncus purus tincidunt auctor. Vestibulum auctor libero non aliquet faucibus. Curabitur interdum metus id ante malesuada, sit amet vestibulum sem tincidunt. Nulla pretium efficitur rutrum.</p>
+                </li>
+                <li>
+                    <h2>Blog #4</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam interdum scelerisque volutpat. In non faucibus ante. Nulla velit arcu, elementum quis sem at, viverra fringilla magna. Aenean varius condimentum eros. Sed aliquet pellentesque tortor quis finibus. Aliquam sed lobortis metus, non eleifend est. Nullam id luctus lorem, id fringilla sapien. Vivamus volutpat, elit eget pellentesque convallis, orci purus elementum lacus, id viverra tortor tortor vitae metus. Morbi vel pretium elit. Suspendisse eros ipsum, mollis condimentum augue faucibus, pretium vehicula lorem.</p>
+                    <p>Quisque eget iaculis ante. Vivamus laoreet consequat ipsum, a ultrices arcu aliquet vitae. Curabitur viverra a ligula nec gravida. Fusce dui sem, suscipit non vestibulum in, ornare in justo. Nam ultricies tempus blandit. Cras pulvinar erat sem, at sollicitudin magna pellentesque eget. Vestibulum dictum nisi mollis convallis dapibus. Donec nec diam molestie, rhoncus nibh a, mollis elit. Suspendisse ac semper arcu. Nullam ultrices hendrerit neque sed faucibus. Proin enim orci, dignissim quis faucibus sit amet, pretium vitae metus. Mauris facilisis, neque lobortis scelerisque rutrum, est ante viverra risus, id porttitor dui ligula et urna.</p>
+                    <p>Etiam cursus magna et leo pulvinar pellentesque. Morbi consectetur eros tortor, fermentum feugiat libero gravida eget. Vestibulum sed lobortis velit. Morbi arcu est, sollicitudin ac risus sed, tempus egestas justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras et efficitur quam. Phasellus vitae massa rhoncus purus tincidunt auctor. Vestibulum auctor libero non aliquet faucibus. Curabitur interdum metus id ante malesuada, sit amet vestibulum sem tincidunt. Nulla pretium efficitur rutrum.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

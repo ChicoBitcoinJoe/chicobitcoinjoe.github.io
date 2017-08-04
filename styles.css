@@ -1,0 +1,73 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+    background-color: #333;
+}
+
+::-webkit-scrollbar {
+   display: none;
+}
+
+a {
+    color: rgba(255,255,255,0.87);
+    text-decoration: none;
+}
+
+p {
+    font-size: 16px;
+    line-height: 22px;
+    color: rgba(255,255,255,0.87);
+}
+
+li {
+    color: rgba(255,255,255,0.87);
+    padding: 3px 0px;
+}
+
+div, h1,h2,h3,h4,h5,i {
+    color: rgba(255,255,255,0.87);
+}
+
+code {
+    background-color:rgba(0,0,0,0.25);
+    color:rgba(255,255,255,0.87);
+    line-height:18px;
+}
+
+.card-media {
+    background-color: #999;
+    border: 5px solid rgba(255,255,255,0.87);
+}
+
+.link {
+    color: rgba(200,200,255,0.67);
+}
+
+md-card {
+    background-color: #333;
+    margin: 0px !important;
+}
+
+@media screen and (min-width: 740px) {
+    .screenLessThan740px {
+        display: none !important;
+    }
+}
+
+.menu-button {
+    background-color: #333;
+    opacity: 0.87;
+}
+
+#contact-container {
+    float:left;
+}
+
+.project-button {
+    text-transform: lowercase;
+    color: rgba(255,255,255,0.87) !important;
+}
+
+.no-box-shadow {
+    box-shadow: none !important;;
+}
