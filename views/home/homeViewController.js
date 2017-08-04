@@ -64,6 +64,18 @@ function($q,$scope,$mdSidenav,$rootScope,Web3Service,ITO){
             $scope.state.secondsUntilOfferStarts = $scope.state.ito.OFFER_STARTS - now;
             $scope.state.secondsUntilOfferExpires = $scope.state.ito.OFFER_EXPIRES - now;
             $scope.state.secondsUntilWithdrawExpires = $scope.state.ito.WITHDRAW_PERIOD_EXPIRES - now;
+            
+            $scope.offerStarted = false;
+            $scope.offerEnded = false;
+            $scope.withdrawPeriodEnded = false;
+            
+            if($scope.state.secondsUntilOfferStarts < 0 && $scope.state.secondsUntilOfferExpires > 0)
+                $scope.offerStarted = true;
+            else
+                $scope.offerEnded = true;
+                
+            if($scope.state.secondsUntilWithdrawExpires < 0)
+                $scope.withdrawPeriodEnded = true;
         });
     };
     
