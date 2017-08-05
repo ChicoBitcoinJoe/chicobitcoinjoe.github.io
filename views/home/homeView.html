@@ -22,7 +22,7 @@
                                     <h2>Joseph B. Reed</h2>
                                     <h4>Contact Me</h4>
                                     <div style="min-width:220px;">
-                                        <a ng-href="mailto:chicobitcoinjoe@gmail.com" target="_blank"><span style="margin-bottom:5px;" layout="row">email <span flex></span>  chicobitcoinjoe@gmail.com</span></a>
+                                        <a ng-href="mailto:chicobitcoinjoe@gmail.com" target="_blank"><span style="margin-bottom:5px;" layout="row">email: <span flex></span>  chicobitcoinjoe@gmail.com</span></a>
                                         <a href="https://github.com/ChicoBitcoinJoe" target="_blank"><span style="margin-bottom:5px;" layout="row">github.com/ <span flex></span> ChicoBitcoinJoe</span></a>
                                         <a href="https://www.reddit.com/user/ChicoBitcoinJoe/" target="_blank"><span style="margin-bottom:5px;" layout="row">reddit.com/user/ <span flex></span> ChicoBitcoinJoe</span></a>
                                     </div>
@@ -74,12 +74,12 @@
                         Once a week the MeDao Founder can receive up to 40 hours worth of tokens. Intrinsically, a single token is worth 1 second of time. Meaning, 1 hours worth of the Founder's tokens can be redeemed for 1 hour of a service they offer. Time does not have to be redeemed immediately and can be saved for later use. This is particularly useful if one believes the Founder's time might be more valuable in the future. An optional burn function is provided for people to make payments to the MeDao thus showing proof of work done by the MeDao Founder.
                     </p>
                     <code layout layout-margin layout-padding>
-                        A simple use case for a MeDao could look as follows: A music artist sells 40 hours of his time each week to his fans. This gives the Founder a basic income they can rely on while he creates his music. The artist promises the following to those who hold his time: I will create a snapshot of the token distribution every time I release a song. Profit generated from selling copies of the song go directly to a contract where, at any point, a token holder can exchange their snapshot tokens for an equal distribution of profits held by the contract. Assuming there is demand for the artists song, the token will be traded on an exchange where the value of the token is equal to the current profits held by the contract plus a premium equal to the potential future profits of that song. Better songs will earn more profit and thus have a higher exchange rate. The artists basic income will also increase as the demand for his time increases. 
+                        A simple use case for a MeDao could look as follows: A music artist sells 40 hours of time each week to their fans. This gives the artist a basic income they can rely on while creating music. The artist promises the following to those who hold his time: I will create a snapshot of the token distribution every time I release a song. Profit generated from selling copies of the song go directly to a contract where, at any point, a token holder can exchange their snapshot tokens for an equal distribution of profits held by the contract. Assuming there is demand for the artists song, the token will be traded on an exchange where the value of the token is equal to the current profits held by the contract plus a premium equal to the potential future profits of that song. Better songs will earn more profit and thus have a higher exchange rate. The artists basic income will also increase as the demand for his time increases. 
                         <br><br>
-                        It is possible through "value added" that a Founder's time becomes too expensive and no one will want to claim any literal time with the Founder. This is natural and means the artist's time is better spent making music instead of something like teaching music lessons. Alternatively, the Founder can choose to give a discount on their literal time by accepting a fraction of a token hour in exchange for a real hour.
+                        It is possible through "value added" that the artist's time becomes too expensive and no one will want to claim any literal time. This is natural and means the artist's time is better spent making music instead of something like teaching music lessons. Alternatively, the artist can choose to give a discount on their literal time by accepting a fraction of a token hour in exchange for a real hour.
                     </code>
                     <p>
-                         In the future, MeDao can evolve to use things like Bancor (liquidity as a service) and TokenCard (erc20 token debit card) to create a personal debit/credit card. Shareholders could set a card max and minimum payment. If the MeDao Founder fails to show proof of work the max would decrease until they are caught up. If their proof of work get's too low their exchange rate would suffer and thus their hourly wage as well.
+                         In the future, MeDao can evolve to use things like Bancor (liquidity as a service) and TokenCard (ERC20 token debit card) to create a personal debit/credit card. Shareholders could set a maximum card limit and minimum monthly payment. If the MeDao Founder fails to show proof of work that meets the payment then the card limit would decrease until payments are caught up. Additionally, if proof of work get's too low their exchange rate would suffer and thus their hourly wage as well.
                     </p>
                 </div>
             </span>
@@ -137,8 +137,16 @@
             </p>
             <h3>Debugging</h3>
             <p>
-                Bugs are everywhere! I can debug and test any contract written in solidity and give you a little extra piece of mind.
+                Bugs are everywhere! I can debug and test any contract written in solidity and give you a little extra piece of mind. 
             </p>
+            <p>
+                Bugs I have found so far:
+            </p>
+            <div layout="row" layout-padding flex>
+                <a style="color:rgba(222,222,255,0.87);" href="https://github.com/Giveth/minime/pull/24">MiniMe Token Clone Bug</a>
+                <span flex></span> 
+                <div>4 eth reward</div>
+            </div>
         </div>
     </div>
     <div id="invest" layout="column" layout-padding>
@@ -189,7 +197,7 @@
             </div>
             <div style="background-color:rgba(0,0,0,0.05)" layout="column" layout-gt-sm="row" layout-padding flex-gt-sm>
                 <div layout="row" flex="50">
-                    <b>Offer Expires</b>
+                    <div>Offer Expires</div>
                     <span flex></span>
                     <div>
                         <timer seconds="state.secondsUntilOfferExpires"></timer>
@@ -197,7 +205,7 @@
                 </div>
                 <span flex-gt-sm="5"></span>
                 <div layout="row" flex="50">
-                    <b>Withdraw Period Ends</b>
+                    <div>Withdraw Period Ends</div>
                     <span flex></span>
                     <div>
                         <timer seconds="state.secondsUntilWithdrawExpires"></timer>
@@ -234,13 +242,13 @@
                 <div layout="row" flex="50">
                     <b>Current Token Price</b>
                     <span flex></span>
-                    <div>{{ state.ito.currentTokenPrice | decimals:3}} <small style="color:rgba(255,255,255,0.67)">eth/token</small></div>
+                    <div>{{ state.currentTokenPrice | decimals:0}} <small style="color:rgba(255,255,255,0.67)">tokens/eth</small></div>
                 </div>
                 <span flex-gt-sm="5"></span>
                 <div layout="row" flex="50">
-                    <b>Minimum Token Price</b>
+                    <b>Committed Token Price</b>
                     <span flex></span>
-                    <div>0 <small style="color:rgba(255,255,255,0.67)">eth/token</small></div>
+                    <div>{{ state.minTokenPrice | decimals:0}} <small style="color:rgba(255,255,255,0.67)">tokens/eth</small></div>
                 </div>
             </div>
             <div hide style="background-color:rgba(0,0,0,0.05)" layout="column" layout-gt-sm="row" layout-padding flex-gt-sm>
@@ -291,23 +299,43 @@
                     <md-button 
                         class="project-button md-raised md-primary" 
                         ng-click="type = 'deposit'" 
-                        ng-disabled="!offerStarted || offerEnded" 
+                        ng-disabled="!offerStarted || offerEnded || type == 'deposit'" 
                         min="0" flex>
                         deposit
                     </md-button>
                     <md-button 
                         class="project-button md-raised md-warn" 
-                        ng-class="{'md-button-disabled': !offerStarted || offerEnded || !hasBalance}" 
+                        ng-class="{'md-button-disabled': !offerStarted || offerEnded || !hasUncommittedBalance}" 
                         ng-click="type = 'commit'" 
-                        ng-disabled="!offerStarted || offerEnded || !hasBalance" 
+                        ng-disabled="withdrawPeriodEnded || !hasUncommittedBalance || type == 'commit'" 
                         min="0" flex>
                         commit
                     </md-button>
-                    <md-button class="project-button md-raised md-warn md-hue-2" ng-disabled="!offerStarted || offerEnded" ng-click="type = 'depositAndCommit'" flex>deposit and commit</md-button>
+                    <md-button 
+                        class="project-button md-raised md-warn md-hue-2" 
+                        ng-disabled="!offerStarted || offerEnded || type == 'depositAndCommit'"
+                        ng-click="type = 'depositAndCommit'" 
+                        flex>
+                        deposit and commit
+                    </md-button>
                 </div>
                 <div layout="column" layout-gt-xs="row" flex-gt-xs>
-                    <md-button class="md-raised" style="text-transform:lowercase;" ng-disabled="!offerStarted || withdrawPeriodEnded || !hasBalance" flex="50">withdraw</md-button>
-                    <md-button class="md-raised" style="text-transform:lowercase;" ng-disabled="!withdrawPeriodEnded" flex="50">claim tokens</md-button>
+                    <md-button 
+                        class="md-raised" 
+                        style="text-transform:lowercase;" 
+                        ng-click="type = 'withdraw'" 
+                        ng-disabled="withdrawPeriodEnded || !hasUncommittedBalance || type == 'withdraw'" 
+                        flex="50">
+                        withdraw
+                    </md-button>
+                    <md-button 
+                        class="md-raised" 
+                        style="text-transform:lowercase;" 
+                        ng-click="type = 'claimTokens'" 
+                        ng-disabled="!withdrawPeriodEnded || $scope.state.user.balance <= 0 || type == 'claimTokens'" 
+                        flex="50">
+                        claim tokens
+                    </md-button>
                 </div>
                 <br>
                 <div ng-show="type == 'deposit'" layout="column" flex>
@@ -327,7 +355,7 @@
                         <md-button class="project-button" ng-click="input.depositInEther = maxEther()">max</md-button>
                     </div>
                     <div layout="row" flex>
-                        <md-button class="project-button md-raised md-primary md-hue-2" ng-click="deposit()" ng-disabled="input.depositInEther <= 0 || !input.depositTos || input.depositInEther == null" flex>deposit</md-button>
+                        <md-button class="project-button md-raised md-primary" ng-click="deposit()" ng-disabled="input.depositInEther <= 0 || !input.depositTos || input.depositInEther == null" flex>deposit</md-button>
                     </div>
                 </div>
                 <div ng-show="type == 'commit'" layout="column" flex>
@@ -346,7 +374,7 @@
                         <md-button class="project-button" ng-click="input.commitInEther = maxCommit()">max</md-button>
                     </div>
                     <div layout="row" flex>
-                        <md-button class="project-button md-raised md-warn" ng-click="commit()" ng-disabled="input.commitInEther <= 0 || !input.commitTos" flex>commit</md-button>
+                        <md-button class="project-button md-raised md-warn" ng-click="commit()" ng-disabled="input.commitInEther <= 0 || !input.commitTos  || input.commitInEther == null" flex>commit</md-button>
                     </div>
                 </div>
                 <div ng-show="type == 'depositAndCommit'" layout="column" flex>
@@ -365,7 +393,19 @@
                         <md-button class="project-button" ng-click="input.depositInEther = maxEther()">max</md-button>
                     </div>
                     <div layout="row" flex>
-                        <md-button class="project-button md-raised md-warn" ng-click="commit()" ng-disabled="input.depositInEther <= 0 || !input.depositAndCommitTos" flex>deposit and commit</md-button>
+                        <md-button class="project-button md-raised md-warn" ng-click="depositAndCommit()" ng-disabled="input.depositInEther <= 0 || !input.depositAndCommitTos  || input.depositInEther == null" flex>deposit and commit</md-button>
+                    </div>
+                </div>
+                <div ng-show="type == 'withdraw'" layout="column" flex>
+                    <div layout-xs="column" layout="row" flex-gt-xs>
+                        <md-input-container flex>
+                            <label style="color:rgba(255,255,255,0.87) !important">Withdraw Amount in Ether</label>
+                            <input type="number" style="color:rgba(255,255,255,0.87) !important" ng-model="input.withdrawInEther">
+                        </md-input-container>
+                        <md-button class="project-button" ng-click="input.withdrawInEther = maxCommit()">max</md-button>
+                    </div>
+                    <div layout="row" flex>
+                        <md-button class="md-raised" style="text-transform:lowercase" ng-click="withdraw()" ng-disabled="input.withdrawInEther <= 0 || input.withdrawInEther == null" flex>withdraw</md-button>
                     </div>
                 </div>
             </div>

@@ -94,15 +94,16 @@ function($q,$scope,$mdSidenav,$rootScope,Web3Service,ITO){
                 $scope.offerStarted = true;
             else
                 $scope.offerEnded = true;
-                
+              
             if($scope.state.secondsUntilWithdrawExpires < 0)
                 $scope.withdrawPeriodEnded = true;
             
+            $scope.state.currentTokenPrice = web3.fromWei($scope.state.ito.MAX_TOKEN_SUPPLY, 'ether') / web3.fromWei($scope.state.ito.totalEther, 'ether');
+            $scope.state.minTokenPrice = web3.fromWei($scope.state.ito.MAX_TOKEN_SUPPLY, 'ether') / web3.fromWei($scope.state.ito.committed_ether, 'ether');
+            
             Web3Service.getEtherBalance($scope.state.user.address)
             .then(function(balanceInWei){
-                console.log(balanceInWei);
                 $scope.state.user.etherBalanceInWei = balanceInWei;
-                console.log($scope.state.user.etherBalanceInWei);
             });
             
             ITO.getBalances($scope.state.user.address)
@@ -112,9 +113,9 @@ function($q,$scope,$mdSidenav,$rootScope,Web3Service,ITO){
                 $scope.state.user.balance = web3.fromWei($scope.state.user.uncommitted,'ether').toNumber() + web3.fromWei($scope.state.user.committed,'ether').toNumber();
                 //console.log($scope.state.user.committed,$scope.state.user.uncommitted);
                 //console.log($scope.state.user.balance);
-                $scope.hasBalance = false;
+                $scope.hasUncommittedBalance = false;
                 if(web3.fromWei($scope.state.user.uncommitted,'ether').toNumber() > 0)
-                    $scope.hasBalance = true;
+                    $scope.hasUncommittedBalance = true;
             });
             
             ITO.balanceOf($scope.state.user.address)
@@ -147,18 +148,22 @@ function($q,$scope,$mdSidenav,$rootScope,Web3Service,ITO){
         ITO.deposit(web3.toWei($scope.input.depositInEther,'ether'))
         .then(function(txHash){
             //set lock here
+            $scope.type = null;
             return Web3Service.getTransactionReceipt();
         }).then(function(receipt){
+            console.log(receipt);
             //release lock here
         });
     }
     
-    $scope.depositAndCommit = function(){
-        ITO.depositAndCommit(web3.toWei($scope.input.depositInEther,'ether'))
+    $scope.withdraw = function(){
+        ITO.withdraw(web3.toWei($scope.input.withdrawInEther,'ether'))
         .then(function(txHash){
             //set lock here
+            $scope.type = null;
             return Web3Service.getTransactionReceipt();
         }).then(function(receipt){
+            console.log(receipt);
             //release lock here
         });
     }
@@ -167,8 +172,22 @@ function($q,$scope,$mdSidenav,$rootScope,Web3Service,ITO){
         ITO.commit(web3.toWei($scope.input.commitInEther,'ether'))
         .then(function(txHash){
             //set lock here
+            $scope.type = null;
             return Web3Service.getTransactionReceipt();
         }).then(function(receipt){
+            console.log(receipt);
+            //release lock here
+        });
+    }
+    
+    $scope.depositAndCommit = function(){
+        ITO.depositAndCommit(web3.toWei($scope.input.depositInEther,'ether'))
+        .then(function(txHash){
+            //set lock here
+            $scope.type = null;
+            return Web3Service.getTransactionReceipt();
+        }).then(function(receipt){
+            console.log(receipt);
             //release lock here
         });
     }

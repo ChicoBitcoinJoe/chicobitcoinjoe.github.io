@@ -331,7 +331,7 @@ app.service( 'SimpleITO',['$q','Web3Service', function ($q,Web3Service) {
         },
         depositAndCommit: function(amountInWei){
             var deferred = $q.defer();
-            
+            console.log(amountInWei);
             $q.all([
                 service.getITO(),
                 Web3Service.getCurrentAccount()
