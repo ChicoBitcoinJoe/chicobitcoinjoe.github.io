@@ -22,6 +22,9 @@ app.directive('timer', [function() {
                     //wait
                 } else if($scope.timer.secondsLeft == null){
                     $scope.timer.secondsLeft = $scope.seconds;
+                } else if($scope.timer.secondsLeft < 0){
+                    $scope.timer.value = 0;
+                    $scope.timer.unit = 'seconds'
                 } else {
                    
                     $scope.timer.secondsLeft--;
@@ -38,7 +41,6 @@ app.directive('timer', [function() {
                     timeLeft -= hours*(60*60);
                     var minutes = Math.floor(timeLeft/60);
                     var seconds = timeLeft - minutes*60;
-                    
                     
                     $scope.$apply(function(){
                         if(days > 0){

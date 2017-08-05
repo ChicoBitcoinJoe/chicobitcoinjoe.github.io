@@ -173,7 +173,7 @@
             <div layout="column" layout-padding>
                 <h2>MeDao Initial Token Offering</h2>
                 <div layout="column" style="text-align:justify;">
-                    <p>You can deposit ether up until the deposit period ends and also withdraw any deposited ether up until the withdraw period ends. An optional commit function is provided to lock in your ether so they are no longer able to be withdrawn. This lets participants in the token offering calculate a minimum price per token. After the withdraw period ends all tokens become committed so make sure to withdraw before that time if you want to keep your ether! Tokens are distributed proportionally based on ether deposited. If you deposited 1% of the total ether than you will receive 1% of the token distribution.</p>
+                    <p>You can deposit ether up until the deposit period ends and also withdraw any deposited ether up until the withdraw period ends. An <b>optional commit function</b> is provided to lock in your ether so they are no longer able to be withdrawn. This lets participants in the token offering calculate a minimum ether price per token before the offering ends. After the withdraw period ends all tokens become committed so make sure to withdraw before that time if you want to keep your ether! Tokens are distributed proportionally based on ether deposited. If you deposited 1% of the total ether than you will receive 1% of the token distribution.</p>
                 </div>
             </div>
             <div ng-hide="state.secondsUntilOfferStarts < 0" style="background-color:rgba(255,255,255,0.05)" layout="column" layout-gt-sm="row" layout-padding flex-gt-sm>
@@ -204,7 +204,7 @@
                     </div>
                 </div>
             </div>
-            <div ng-hide="state.secondsUntilOfferStarts < 0" style="background-color:rgba(255,255,255,0.05)" layout="column" layout-gt-sm="row" layout-padding flex-gt-sm>
+            <div style="background-color:rgba(255,255,255,0.05)" layout="column" layout-gt-sm="row" layout-padding flex-gt-sm>
                 <div layout="row" flex="50">
                     <b>Ether Goal</b>
                     <span flex></span>
@@ -221,26 +221,55 @@
                 <div layout="row" flex="50">
                     <div>Ether Committed</div>
                     <span flex></span>
-                    <div>0 <small style="color:rgba(255,255,255,0.67)">eth</small></div>
+                    <div>{{state.ito.committed_ether | fromWei:'ether' | decimals:0}} <small style="color:rgba(255,255,255,0.67)">eth</small></div>
                 </div>
                 <span flex-gt-sm="5"></span>
                 <div layout="row" flex="50">
                     <div>Ether Uncommitted</div>
                     <span flex></span>
-                    <div>0 <small style="color:rgba(255,255,255,0.67)">eth</small></div>
+                    <div>{{state.ito.uncommitted_ether | fromWei:'ether' | decimals:0}} <small style="color:rgba(255,255,255,0.67)">eth</small></div>
                 </div>
             </div>
-            <div hide style="background-color:rgba(255,255,255,0.05)" layout="column" layout-gt-sm="row" layout-padding flex-gt-sm>
+            <div style="background-color:rgba(255,255,255,0.05)" layout="column" layout-gt-sm="row" layout-padding flex-gt-sm>
                 <div layout="row" flex="50">
-                    <b>Converted Ether</b>
+                    <b>Current Token Price</b>
+                    <span flex></span>
+                    <div>{{ state.ito.currentTokenPrice | decimals:3}} <small style="color:rgba(255,255,255,0.67)">eth/token</small></div>
+                </div>
+                <span flex-gt-sm="5"></span>
+                <div layout="row" flex="50">
+                    <b>Minimum Token Price</b>
+                    <span flex></span>
+                    <div>0 <small style="color:rgba(255,255,255,0.67)">eth/token</small></div>
+                </div>
+            </div>
+            <div hide style="background-color:rgba(0,0,0,0.05)" layout="column" layout-gt-sm="row" layout-padding flex-gt-sm>
+                <div layout="row" flex="50">
+                    <div>Converted Ether</div>
                     <span flex></span>
                     <div>{{state.ito.converted_ether | fromWei:'ether' | decimals:0}} <small style="color:rgba(255,255,255,0.67)">eth</small></div>
                 </div>
                 <span flex-gt-sm="5"></span>
                 <div layout="row" flex="50">
-                    <b>Claimed Tokens</b>
+                    <div>Claimed Tokens</div>
                     <span flex></span>
                     <div>{{state.ito.claimed_tokens  | fromWei:'ether' | decimals:0}} <small style="color:rgba(255,255,255,0.67)">tokens</small></div>
+                </div>
+            </div>
+
+            <md-divider style="border-color:rgba(255,255,255,0.87); margin:20px 0px;"></md-divider>
+
+            <div style="background-color:rgba(0,0,0,0.05)" layout="column" layout-gt-sm="row" layout-padding flex-gt-sm>
+                <div layout="row" flex="50">
+                    <div>Your Balance Committed</div>
+                    <span flex></span>
+                    <div>{{state.user.committed | fromWei:'ether' | decimals:3}} <small style="color:rgba(255,255,255,0.67)">eth</small></div>
+                </div>
+                <span flex-gt-sm="5"></span>
+                <div layout="row" flex="50">
+                    <div>Your Balance Uncommitted</div>
+                    <span flex></span>
+                    <div>{{state.user.uncommitted | fromWei:'ether' | decimals:3}} <small style="color:rgba(255,255,255,0.67)">eth</small></div>
                 </div>
             </div>
             <div style="background-color:rgba(255,255,255,0.05)" layout="column" layout-gt-sm="row" layout-padding flex-gt-sm>
@@ -253,46 +282,92 @@
                 <div  layout="row" flex="50">
                     <b>Your Token Claim</b>
                     <span flex></span>
-                    <b>0 <small style="color:rgba(255,255,255,0.67)">tokens</small></b>
+                    <b>{{state.user.tokenClaim | fromWei:'ether' | decimals:0}} <small style="color:rgba(255,255,255,0.67)">tokens</small></b>
                 </div>
             </div>
-            <div style="background-color:rgba(0,0,0,0.05)" layout="column" layout-gt-sm="row" layout-padding flex-gt-sm>
-                <div layout="row" flex="50">
-                    <b>Current Token Price</b>
-                    <span flex></span>
-                    <div>0 <small style="color:rgba(255,255,255,0.67)">eth/token</small></div>
+            <br>
+            <div layout="column">
+                <div layout="column" layout-gt-xs="row" flex-gt-xs>
+                    <md-button 
+                        class="project-button md-raised md-primary" 
+                        ng-click="type = 'deposit'" 
+                        ng-disabled="!offerStarted || offerEnded" 
+                        min="0" flex>
+                        deposit
+                    </md-button>
+                    <md-button 
+                        class="project-button md-raised md-warn" 
+                        ng-class="{'md-button-disabled': !offerStarted || offerEnded || !hasBalance}" 
+                        ng-click="type = 'commit'" 
+                        ng-disabled="!offerStarted || offerEnded || !hasBalance" 
+                        min="0" flex>
+                        commit
+                    </md-button>
+                    <md-button class="project-button md-raised md-warn md-hue-2" ng-disabled="!offerStarted || offerEnded" ng-click="type = 'depositAndCommit'" flex>deposit and commit</md-button>
                 </div>
-                <span flex-gt-sm="5"></span>
-                <div layout="row" flex="50">
-                    <b>Minimum Token Price</b>
-                    <span flex></span>
-                    <div>0 <small style="color:rgba(255,255,255,0.67)">eth/token</small></div>
+                <div layout="column" layout-gt-xs="row" flex-gt-xs>
+                    <md-button class="md-raised" style="text-transform:lowercase;" ng-disabled="!offerStarted || withdrawPeriodEnded || !hasBalance" flex="50">withdraw</md-button>
+                    <md-button class="md-raised" style="text-transform:lowercase;" ng-disabled="!withdrawPeriodEnded" flex="50">claim tokens</md-button>
                 </div>
-            </div>
-
-            <md-divider style="border-color:rgba(255,255,255,0.87); margin:20px 0px;"></md-divider>
-
-            <div layout="column" layout-gt-sm="row" layout-padding flex-gt-sm>
-                <div layout="row" flex="50">
-                    <b>Your Balance Deposited</b>
-                    <span flex></span>
-                    <div>{{state.ito.uncommitted_ether | fromWei:'ether' | decimals:0}} <small style="color:rgba(255,255,255,0.67)">eth</small></div>
+                <br>
+                <div ng-show="type == 'deposit'" layout="column" flex>
+                    <p style="color:red; text-align:justify">I understand that the token price currently offered is not the final token price that will be given when the offer expires and that the final token price is based on the total amount of ether deposited by all particants after the withdraw period expires.</p>
+                    <p style="color:red; text-align:justify">If you change your mind, make sure to withdraw your ether before the withdraw period expires!</p>
+                    <div layout="row" layout-margin flex>
+                        <span flex></span>
+                        <md-input-container class="md-block" style="margin:0px">
+                            <md-switch class="md-primary" name="special" ng-model="input.depositTos" required>I understand the risks</md-switch>
+                        </md-input-container>
+                    </div>
+                    <div layout-xs="column" layout="row" flex>
+                        <md-input-container flex>
+                            <label style="color:rgba(255,255,255,0.87) !important">Deposit Amount in Ether</label>
+                            <input type="number" style="color:rgba(255,255,255,0.87) !important" ng-model="input.depositInEther">
+                        </md-input-container>
+                        <md-button class="project-button" ng-click="input.depositInEther = maxEther()">max</md-button>
+                    </div>
+                    <div layout="row" flex>
+                        <md-button class="project-button md-raised md-primary md-hue-2" ng-click="deposit()" ng-disabled="input.depositInEther <= 0 || !input.depositTos || input.depositInEther == null" flex>deposit</md-button>
+                    </div>
                 </div>
-                <span flex-gt-sm="5"></span>
-                <div layout="row" flex="50">
-                    <b>Your Balance Committed</b>
-                    <span flex></span>
-                    <div>{{state.ito.committed_ether | fromWei:'ether' | decimals:0}} <small style="color:rgba(255,255,255,0.67)">eth</small></div>
+                <div ng-show="type == 'commit'" layout="column" flex>
+                    <p style="color:red; text-align:justify">I understand that committed ether cannot be withdrawn. I also understand that the token price currently offered is not the final token price that will be given when the offer expires and that the final token price is based on the total amount of ether deposited by all particants before the token offering expires.</p>
+                    <div layout="row" layout-margin flex>
+                        <span flex></span>
+                        <md-input-container class="md-block" style="margin:0px">
+                            <md-switch class="md-primary" style="margin:0px" name="special" ng-model="input.commitTos" required>I understand the risks</md-switch>
+                        </md-input-container>
+                    </div>
+                    <div layout-xs="column" layout="row" flex-gt-xs>
+                        <md-input-container flex>
+                            <label style="color:rgba(255,255,255,0.87) !important">Commit Amount in Ether</label>
+                            <input type="number" style="color:rgba(255,255,255,0.87) !important" ng-model="input.commitInEther">
+                        </md-input-container>
+                        <md-button class="project-button" ng-click="input.commitInEther = maxCommit()">max</md-button>
+                    </div>
+                    <div layout="row" flex>
+                        <md-button class="project-button md-raised md-warn" ng-click="commit()" ng-disabled="input.commitInEther <= 0 || !input.commitTos" flex>commit</md-button>
+                    </div>
                 </div>
-            </div>
-            <div layout="column" layout-gt-xs="row" flex-gt-xs>
-                <md-button class="project-button md-raised md-primary" ng-class="{'md-button-disabled':!offerStarted || offerEnded}" ng-disabled="!offerStarted || offerEnded" flex>deposit</md-button>
-                <md-button class="project-button md-raised md-warn" ng-class="{'md-button-disabled':!offerStarted || offerEnded}" ng-disabled="!offerStarted || offerEnded" flex>commit</md-button>
-                <md-button class="project-button md-raised md-warn md-hue-2" ng-class="{'md-button-disabled':!offerStarted || offerEnded}" ng-disabled="!offerStarted || offerEnded" flex>deposit and commit</md-button>
-            </div>
-            <div layout="column" layout-gt-xs="row" flex-gt-xs>
-                <md-button class="md-raised" style="text-transform:lowercase;" ng-class="{'md-button-disabled':!offerStarted || withdrawPeriodEnded}" ng-disabled="!offerStarted || withdrawPeriodEnded" flex="50">withdraw</md-button>
-                <md-button class="md-raised" style="text-transform:lowercase;" ng-class="{'md-button-disabled':!withdrawPeriodEnded}" ng-disabled="!withdrawPeriodEnded" flex="50">claim tokens</md-button>
+                <div ng-show="type == 'depositAndCommit'" layout="column" flex>
+                    <p style="color:red; text-align:justify">I understand that committed ether cannot be withdrawn. I also understand that the token price currently offered is not the final token price that will be given when the offer expires and that the final token price is based on the total amount of ether deposited by all particants before the token offering expires.</p>
+                    <div layout="row" layout-margin flex>
+                        <span flex></span>
+                        <md-input-container class="md-block" style="margin:0px">
+                            <md-switch class="md-primary" style="margin:0px" name="special" ng-model="input.depositAndCommitTos" required>I understand the risks</md-switch>
+                        </md-input-container>
+                    </div>
+                    <div layout-xs="column" layout="row" flex-gt-xs>
+                        <md-input-container flex>
+                            <label style="color:rgba(255,255,255,0.87) !important">Deposit/Commit Amount in Ether</label>
+                            <input type="number" style="color:rgba(255,255,255,0.87) !important" ng-model="input.depositInEther">
+                        </md-input-container>
+                        <md-button class="project-button" ng-click="input.depositInEther = maxEther()">max</md-button>
+                    </div>
+                    <div layout="row" flex>
+                        <md-button class="project-button md-raised md-warn" ng-click="commit()" ng-disabled="input.depositInEther <= 0 || !input.depositAndCommitTos" flex>deposit and commit</md-button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

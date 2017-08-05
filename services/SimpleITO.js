@@ -10,7 +10,7 @@ app.service( 'SimpleITO',['$q','Web3Service', function ($q,Web3Service) {
         abi: [{"constant":false,"inputs":[{"name":"account","type":"address"}],"name":"depositAndCommit","outputs":[],"payable":true,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balances","outputs":[{"name":"uncommitted","type":"uint256"},{"name":"committed","type":"uint256"},{"name":"claimed","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"withdraw","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"WITHDRAW_PERIOD_EXPIRES","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"account","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"OFFER_EXPIRES","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"OFFER_STARTS","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"totalEther","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"converted_ether","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"committed_ether","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"account","type":"address"}],"name":"claimTokens","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"uncommitted_ether","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"Vault","type":"address"}],"name":"collectEther","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"account","type":"address"}],"name":"deposit","outputs":[],"payable":true,"type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"commit","outputs":[],"payable":false,"type":"function"},{"inputs":[{"name":"_OFFER_STARTS","type":"uint256"},{"name":"_OFFER_EXPIRES","type":"uint256"},{"name":"_WITHDRAW_PERIOD_EXPIRES","type":"uint256"}],"payable":false,"type":"constructor"},{"payable":true,"type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"account","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Deposit_event","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"account","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Commit_event","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"account","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Withdraw_event","type":"event"}]
     }
     
-    var SimpleITO = web3.eth.contract(SimpleITO.abi).at(SimpleITO.address);
+    var SimpleITOInstance = web3.eth.contract(SimpleITO.abi).at(SimpleITO.address);
     
     var service = {
         getState: function(){
@@ -53,7 +53,7 @@ app.service( 'SimpleITO',['$q','Web3Service', function ($q,Web3Service) {
         getITO: function(){
             var deferred = $q.defer();
             
-            SimpleITO.ITO(function(err,itoAddress){
+            SimpleITOInstance.ITO(function(err,itoAddress){
                 if(!err) {
                     deferred.resolve(itoAddress);
                 } else {
@@ -66,7 +66,7 @@ app.service( 'SimpleITO',['$q','Web3Service', function ($q,Web3Service) {
         getToken: function(){
             var deferred = $q.defer();
             
-            SimpleITO.Token(function(err,tokenAddress){
+            SimpleITOInstance.Token(function(err,tokenAddress){
                 if(!err) {
                     deferred.resolve(tokenAddress);
                 } else {
@@ -79,7 +79,7 @@ app.service( 'SimpleITO',['$q','Web3Service', function ($q,Web3Service) {
         getVault: function(){
             var deferred = $q.defer();
             
-            SimpleITO.Vault(function(err,vaultAddress){
+            SimpleITOInstance.Vault(function(err,vaultAddress){
                 if(!err) {
                     deferred.resolve(vaultAddress);
                 } else {
@@ -92,7 +92,7 @@ app.service( 'SimpleITO',['$q','Web3Service', function ($q,Web3Service) {
         getMaxTokenSupply: function(){
             var deferred = $q.defer();
             
-            SimpleITO.MAX_TOKEN_SUPPLY(function(err,maxTokenSupply){
+            SimpleITOInstance.MAX_TOKEN_SUPPLY(function(err,maxTokenSupply){
                 if(!err) {
                     deferred.resolve(maxTokenSupply);
                 } else {
@@ -105,7 +105,7 @@ app.service( 'SimpleITO',['$q','Web3Service', function ($q,Web3Service) {
         getClaimedTokens: function(){
             var deferred = $q.defer();
             
-            SimpleITO.claimed_tokens(function(err,claimedTokens){
+            SimpleITOInstance.claimed_tokens(function(err,claimedTokens){
                 if(!err) {
                     deferred.resolve(claimedTokens);
                 } else {
@@ -118,7 +118,7 @@ app.service( 'SimpleITO',['$q','Web3Service', function ($q,Web3Service) {
         claimCalculator: function(deposit,totalSupply){
             var deferred = $q.defer();
             
-            SimpleITO.claimCalculator(deposit, totalSupply, function(err,claimAmountInWei){
+            SimpleITOInstance.claimCalculator(deposit, totalSupply, function(err,claimAmountInWei){
                 if(!err) {
                     deferred.resolve(claimAmountInWei);
                 } else {
@@ -133,9 +133,9 @@ app.service( 'SimpleITO',['$q','Web3Service', function ($q,Web3Service) {
             var deferred = $q.defer();
             
             service.getITO().then(function(itoAddress){
-                var ito_instance = web3.eth.contract(ITO.abi).at(itoAddress);
+                var itoInstance = web3.eth.contract(ITO.abi).at(itoAddress);
                 
-                ito_instance.OFFER_STARTS(function(err,offerStartTimestamp){
+                itoInstance.OFFER_STARTS(function(err,offerStartTimestamp){
                     if(!err) {
                         deferred.resolve(offerStartTimestamp);
                     } else {
@@ -151,9 +151,9 @@ app.service( 'SimpleITO',['$q','Web3Service', function ($q,Web3Service) {
             var deferred = $q.defer();
             
             service.getITO().then(function(itoAddress){
-                var ito_instance = web3.eth.contract(ITO.abi).at(itoAddress);
+                var itoInstance = web3.eth.contract(ITO.abi).at(itoAddress);
                 
-                ito_instance.OFFER_EXPIRES(function(err,offerExpiresTimestamp){
+                itoInstance.OFFER_EXPIRES(function(err,offerExpiresTimestamp){
                     if(!err) {
                         deferred.resolve(offerExpiresTimestamp);
                     } else {
@@ -168,9 +168,9 @@ app.service( 'SimpleITO',['$q','Web3Service', function ($q,Web3Service) {
             var deferred = $q.defer();
             
             service.getITO().then(function(itoAddress){
-                var ito_instance = web3.eth.contract(ITO.abi).at(itoAddress);
+                var itoInstance = web3.eth.contract(ITO.abi).at(itoAddress);
                 
-                ito_instance.WITHDRAW_PERIOD_EXPIRES(function(err,endWithdrawPeriodTimestamp){
+                itoInstance.WITHDRAW_PERIOD_EXPIRES(function(err,endWithdrawPeriodTimestamp){
                     if(!err) {
                         deferred.resolve(endWithdrawPeriodTimestamp);
                     } else {
@@ -185,9 +185,9 @@ app.service( 'SimpleITO',['$q','Web3Service', function ($q,Web3Service) {
             var deferred = $q.defer();
             
             service.getITO().then(function(itoAddress){
-                var ito_instance = web3.eth.contract(ITO.abi).at(itoAddress);
+                var itoInstance = web3.eth.contract(ITO.abi).at(itoAddress);
                 
-                ito_instance.uncommitted_ether(function(err,uncommittedEther){
+                itoInstance.uncommitted_ether(function(err,uncommittedEther){
                     if(!err) {
                         deferred.resolve(uncommittedEther);
                     } else {
@@ -202,9 +202,9 @@ app.service( 'SimpleITO',['$q','Web3Service', function ($q,Web3Service) {
             var deferred = $q.defer();
             
             service.getITO().then(function(itoAddress){
-                var ito_instance = web3.eth.contract(ITO.abi).at(itoAddress);
+                var itoInstance = web3.eth.contract(ITO.abi).at(itoAddress);
                 
-                ito_instance.committed_ether(function(err,committedEther){
+                itoInstance.committed_ether(function(err,committedEther){
                     if(!err) {
                         deferred.resolve(committedEther);
                     } else {
@@ -219,9 +219,9 @@ app.service( 'SimpleITO',['$q','Web3Service', function ($q,Web3Service) {
             var deferred = $q.defer();
             
             service.getITO().then(function(itoAddress){
-                var ito_instance = web3.eth.contract(ITO.abi).at(itoAddress);
+                var itoInstance = web3.eth.contract(ITO.abi).at(itoAddress);
                 
-                ito_instance.converted_ether(function(err,convertedEther){
+                itoInstance.converted_ether(function(err,convertedEther){
                     if(!err) {
                         deferred.resolve(convertedEther);
                     } else {
@@ -236,11 +236,28 @@ app.service( 'SimpleITO',['$q','Web3Service', function ($q,Web3Service) {
             var deferred = $q.defer();
             
             service.getITO().then(function(itoAddress){
-                var ito_instance = web3.eth.contract(ITO.abi).at(itoAddress);
+                var itoInstance = web3.eth.contract(ITO.abi).at(itoAddress);
                 
-                ito_instance.totalEther(function(err,totalEtherInWei){
+                itoInstance.totalEther(function(err,totalEtherInWei){
                     if(!err) {
                         deferred.resolve(totalEtherInWei);
+                    } else {
+                        deferred.reject(err);
+                    }
+                });    
+            });
+            
+            return deferred.promise;
+        },
+        getBalances: function(account){
+            var deferred = $q.defer();
+            
+            service.getITO().then(function(itoAddress){
+                var itoInstance = web3.eth.contract(ITO.abi).at(itoAddress);
+                
+                itoInstance.balances(account, function(err,balanceArray){
+                    if(!err) {
+                        deferred.resolve(balanceArray);
                     } else {
                         deferred.reject(err);
                     }
@@ -253,9 +270,9 @@ app.service( 'SimpleITO',['$q','Web3Service', function ($q,Web3Service) {
             var deferred = $q.defer();
             
             service.getITO().then(function(itoAddress){
-                var ito_instance = web3.eth.contract(ITO.abi).at(itoAddress);
+                var itoInstance = web3.eth.contract(ITO.abi).at(itoAddress);
                 
-                ito_instance.balanceOf(account, function(err,balanceInWei){
+                itoInstance.balanceOf(account, function(err,balanceInWei){
                     if(!err) {
                         deferred.resolve(balanceInWei);
                     } else {
@@ -266,25 +283,99 @@ app.service( 'SimpleITO',['$q','Web3Service', function ($q,Web3Service) {
             
             return deferred.promise;
         },
-        deposit: function(){
+        deposit: function(amountInWei){
+            var deferred = $q.defer();
             
+            $q.all([
+                service.getITO(),
+                Web3Service.getCurrentAccount()
+            ]).then(function(promises){
+                var itoAddress = promises[0];
+                var currentAccount = promises[1];
+                
+                var itoInstance = web3.eth.contract(ITO.abi).at(itoAddress);
+                console.log(currentAccount,amountInWei);
+                itoInstance.deposit(currentAccount, {from:currentAccount,value:amountInWei}, function(err,txHash){
+                    if(!err) {
+                        deferred.resolve(txHash);
+                    } else {
+                        deferred.reject(err);
+                    }
+                });    
+            });
+            
+            return deferred.promise;
         },
-        proxyDeposit: function () {
+        commit: function(amountInWei){
+            var deferred = $q.defer();
             
+            $q.all([
+                service.getITO(),
+                Web3Service.getCurrentAccount()
+            ]).then(function(promises){
+                var itoAddress = promises[0];
+                var currentAccount = promises[1];
+                
+                var itoInstance = web3.eth.contract(ITO.abi).at(itoAddress);
+                
+                itoInstance.commit(amountInWei, {from:currentAccount}, function(err,txHash){
+                    if(!err) {
+                        deferred.resolve(txHash);
+                    } else {
+                        deferred.reject(err);
+                    }
+                });    
+            });
+            
+            return deferred.promise;
         },
-        commit: function(){
+        depositAndCommit: function(amountInWei){
+            var deferred = $q.defer();
             
+            $q.all([
+                service.getITO(),
+                Web3Service.getCurrentAccount()
+            ]).then(function(promises){
+                var itoAddress = promises[0];
+                var currentAccount = promises[1];
+                
+                var itoInstance = web3.eth.contract(ITO.abi).at(itoAddress);
+                console.log(currentAccount,amountInWei);
+                itoInstance.depositAndCommit(currentAccount, {from:currentAccount,value:amountInWei}, function(err,txHash){
+                    if(!err) {
+                        deferred.resolve(txHash);
+                    } else {
+                        deferred.reject(err);
+                    }
+                });    
+            });
+            
+            return deferred.promise;
         },
-        depositAndCommit: function(){
+        withdraw: function(amountInWei){
+            var deferred = $q.defer();
             
-        },
-        withdraw: function(){
+            $q.all([
+                service.getITO(),
+                Web3Service.getCurrentAccount()
+            ]).then(function(promises){
+                var itoAddress = promises[0];
+                var currentAccount = promises[1];
+                
+                var itoInstance = web3.eth.contract(ITO.abi).at(itoAddress);
+                console.log(currentAccount,amountInWei);
+                itoInstance.withdraw(amountInWei, {from:currentAccount}, function(err,txHash){
+                    if(!err) {
+                        deferred.resolve(txHash);
+                    } else {
+                        deferred.reject(err);
+                    }
+                });    
+            });
             
+            return deferred.promise;
         },
         claimTokens: function(){
-            
-        },
-        proxyClaimTokens: function(account){
             
         }
 	};

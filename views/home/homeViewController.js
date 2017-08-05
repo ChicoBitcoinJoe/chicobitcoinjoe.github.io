@@ -7,14 +7,33 @@ function($q,$scope,$mdSidenav,$rootScope,Web3Service,ITO){
         secondsUntilOfferStarts: null,
         secondsUntilOfferExpires: null,
         secondsUntilWithdrawExpires: null,
+        currentTokenPrice: null,
+        minTokenPrice: null,
+        user:{
+            address: null,
+            etherBalanceInWei: null,
+            committed: null,
+            uncommitted: null,
+            balance: null,
+            tokenClaim: null
+        }
     };
+    
+    $scope.input = {
+        depositInEther: 0,
+        commitInEther: 0,
+        withdrawInEther: 0,
+        depositTos: false,
+        commitTos: false,
+        depositAndCommitTos: null
+    }
     
     $scope.active = {
         about: false,
         portfolio: false,
         services: false,
         invest: false,
-        blog: null
+        blog: false,
     };
     
     $scope.toggle = function(componentId) {
@@ -55,11 +74,13 @@ function($q,$scope,$mdSidenav,$rootScope,Web3Service,ITO){
     var refresh = function(blockNumber){
         $q.all([
             ITO.getState(),
-            Web3Service.getBlock(blockNumber)
+            Web3Service.getBlock(blockNumber),
+            Web3Service.getCurrentAccount()
         ]).then(function(promises){
             $scope.state.ito = promises[0];
             var blockInfo = promises[1];
             var now = blockInfo.timestamp;
+            $scope.state.user.address = promises[2];
             
             $scope.state.secondsUntilOfferStarts = $scope.state.ito.OFFER_STARTS - now;
             $scope.state.secondsUntilOfferExpires = $scope.state.ito.OFFER_EXPIRES - now;
@@ -76,15 +97,80 @@ function($q,$scope,$mdSidenav,$rootScope,Web3Service,ITO){
                 
             if($scope.state.secondsUntilWithdrawExpires < 0)
                 $scope.withdrawPeriodEnded = true;
+            
+            Web3Service.getEtherBalance($scope.state.user.address)
+            .then(function(balanceInWei){
+                console.log(balanceInWei);
+                $scope.state.user.etherBalanceInWei = balanceInWei;
+                console.log($scope.state.user.etherBalanceInWei);
+            });
+            
+            ITO.getBalances($scope.state.user.address)
+            .then(function(balances){
+                $scope.state.user.uncommitted = balances[0];
+                $scope.state.user.committed = balances[1];
+                $scope.state.user.balance = web3.fromWei($scope.state.user.uncommitted,'ether').toNumber() + web3.fromWei($scope.state.user.committed,'ether').toNumber();
+                //console.log($scope.state.user.committed,$scope.state.user.uncommitted);
+                //console.log($scope.state.user.balance);
+                $scope.hasBalance = false;
+                if(web3.fromWei($scope.state.user.uncommitted,'ether').toNumber() > 0)
+                    $scope.hasBalance = true;
+            });
+            
+            ITO.balanceOf($scope.state.user.address)
+            .then(function(balance){
+                return ITO.claimCalculator(balance,$scope.state.ito.totalEther);
+            }).then(function(tokenClaim){
+                $scope.state.user.tokenClaim = tokenClaim;
+            });
         });
     };
+    
+    $scope.maxEther = function(){
+        return web3.fromWei($scope.state.user.etherBalanceInWei,'ether').toNumber();
+    }
+    
+    $scope.maxCommit = function(){
+        return web3.fromWei($scope.state.user.uncommitted,'ether').toNumber();
+    }
     
     Web3Service.getCurrentBlockNumber()
     .then(function(currentBlock){
        refresh(currentBlock);
     });
 
-    web3.eth.filter('latest', function(err,newBlockInfo){
-        refresh(newBlockInfo);
+    web3.eth.filter('latest', function(err,blockNumber){
+        refresh(blockNumber);
     });
+    
+    $scope.deposit = function(){
+        ITO.deposit(web3.toWei($scope.input.depositInEther,'ether'))
+        .then(function(txHash){
+            //set lock here
+            return Web3Service.getTransactionReceipt();
+        }).then(function(receipt){
+            //release lock here
+        });
+    }
+    
+    $scope.depositAndCommit = function(){
+        ITO.depositAndCommit(web3.toWei($scope.input.depositInEther,'ether'))
+        .then(function(txHash){
+            //set lock here
+            return Web3Service.getTransactionReceipt();
+        }).then(function(receipt){
+            //release lock here
+        });
+    }
+    
+    $scope.commit = function(){
+        ITO.commit(web3.toWei($scope.input.commitInEther,'ether'))
+        .then(function(txHash){
+            //set lock here
+            return Web3Service.getTransactionReceipt();
+        }).then(function(receipt){
+            //release lock here
+        });
+    }
+
 }]);
