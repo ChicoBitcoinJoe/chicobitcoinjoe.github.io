@@ -1,0 +1,102 @@
+<div class="bgc-primary" layout="row" layout-fill layout-align="center">
+    
+    <div layout="column" flex flex-sm="90" flex-md="70" flex-lg="55" flex-xl="40">
+        <div style="background-color: rgb(10,10,10); padding: 0px 16px" 
+            layout="column"
+            layout-align="center center"
+            flex="65">
+            <div class="scrollable" style="padding: 0px 16px; margin: 32px 0px;">
+                <div class="fade" 
+                    style="position: relative" 
+                    ng-show="view == 'quote'">
+                    <div ng-show="showBackButton" 
+                        style="padding: 16px 0px;"
+                        layout="row"
+                        layout-align="end center">
+                        <a ng-click="transitionToView('body')" 
+                            href="" 
+                            layout="row" 
+                            layout-align="start center">
+                            go back to content
+                            <i class="material-icons">keyboard_arrow_right</i>
+                        </a>
+                    </div>
+                    <p style="font-style: italic;">"{{quote.body}}"</p>
+                    <div layout="row" layout-align="end center">- {{quote.author}}</div>
+                </div>
+                <div class="fade" 
+                    style="position: relative" 
+                    ng-show="view == 'body'">
+                    <div style="padding: 16px 0px;"
+                        layout="row"
+                        layout-align="start center">
+                        <a ng-click="transitionToView('quote')"
+                            layout="row" 
+                            href="" 
+                            layout-align="start center">
+                            <i class="material-icons">keyboard_arrow_left</i> 
+                            go back to quote
+                        </a>
+                    </div>
+                    <h3>About Me</h3>
+                    <p>{{body}}</p>
+                    <h3>MeDao</h3>
+                    <p><b>Abstract.</b> {{abstract}}</p>
+                    <md-button class="lowercase"
+                        href="https://docs.google.com/document/d/1A8fjq-fONbSUo_zS8ac7Qs3hqog2Ap78eWHjDGHI5_s/edit?usp=sharing"
+                        target="_blank">
+                        view whitepaper
+                    </md-button>
+                    <h3>Community</h3>
+                    <p>To do...</p>
+                </div>
+            </div>
+        </div>
+        <div class="bgc-primary" 
+            style="min-height: 80px; max-height: 80px;"
+            layout="row"
+            layout-align="center center">
+            <div layout="row" layout-align="end" flex="50">
+                <h2 hide show-gt-sm style="color: #AAA">{{preText}}</h2>
+                <h3 hide show-sm style="color: #AAA">{{preText}}</h3>
+            </div>
+            <h2 hide show-gt-sm>chicobitcoinjoe</h2>
+            <h3 hide-gt-sm>chicobitcoinjoe</h2>
+            <div layout="row" flex="50">
+                <h2 hide show-gt-sm style="color: #AAA">{{postText}}</h2>
+                <h3 hide show-sm style="color: #AAA">{{postText}}</h3>
+            </div>
+        </div>
+        <div style="background-color: rgb(10,10,10);" 
+            layout="row"
+            flex="35">
+            <div layout="column" layout-align="center center" layout-padding flex="50">
+                <div style="color: gray">
+                    Portfolio
+                </div>
+                <a class="lowercase"
+                    ng-repeat="item in portfolio"
+                    ng-href="{{item.link}}"
+                    ng-mouseenter="updateHeader(item)"
+                    ng-mouseleave="updateHeader(null)"
+                    target="_blank">
+                    {{item.name}}
+                </a>
+            </div>
+            <div layout="column" layout-align="center center" layout-padding flex="50">
+                <div style="color: gray">
+                    Contact Me
+                </div>
+                <a class="lowercase"
+                    ng-repeat="item in contacts"
+                    ng-href="{{item.link}}"
+                    ng-mouseenter="updateHeader(item)"
+                    ng-mouseleave="updateHeader(null)"
+                    target="_blank">
+                    {{item.name}}
+                </a>
+            </div>
+        </div>
+    </div>
+    
+</div>

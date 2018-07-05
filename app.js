@@ -1,9 +1,9 @@
-var app = angular.module('app',['ngRoute','ngMaterial','ngMessages','material.svgAssetsCache','ngSanitize']);
+var app = angular.module('app',['ngRoute','ngMaterial','ngAria','ngAnimate']);
 
 app.config(function ($routeProvider) {
 	$routeProvider.
     when('/', {
-        templateUrl: 'views/home/homeView.html',
+        templateUrl: 'views/home/home.view.html',
         controller: 'HomeViewController'
     }).
 	otherwise({
@@ -11,34 +11,26 @@ app.config(function ($routeProvider) {
     });
 });
 
-app.run(function() {
-    console.log('Loading Chico Bitcoin Joe Webpage!'); 
-});
+app.run(['$rootScope', function($rootScope) {
+    console.log('App is loading.');
+}]);
 
 app.filter('fromWei', [function() {
     return function(value, convertTo) {
         if(value == null)
             return 0;
         
-        return web3.fromWei(value,convertTo).toNumber();
+        return web3.utils.fromWei(value,convertTo);
     };
 }]);
 
 app.filter('decimals', [function() {
-    return function(value,decimals) {
+    return function(value, decimals) {
+        value = parseFloat(value);
         if(value == null)
             return 0;
         
         return value.toFixed(decimals);
-    };
-}]);
-
-app.filter('toHours', [function() {
-    return function(value) {
-        if(value == null)
-            return 0;
-        
-        return parseFloat(value / 3600);
     };
 }]);
 
@@ -49,10 +41,4 @@ app.filter('reverse', function() {
         
         return items.slice().reverse();
     };
-});
-
-app.filter('capitalize', function() {
-    return function(input) {
-      return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
-    }
 });
