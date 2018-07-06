@@ -63,9 +63,9 @@ p {
 }
 
 .fade.ng-hide-remove {
-    transition: all linear 2500ms;
+    transition: all linear 1000ms;
 }
 
 .fade.ng-hide-add {
-    transition: all linear 2500ms;
+    transition: all linear 1500ms;
 }

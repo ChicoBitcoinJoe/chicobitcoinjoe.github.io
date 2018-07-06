@@ -53,16 +53,23 @@ function($scope){
         }
     }
 
-   var transitioning = false;
+    var first = true;
+    var transitioning = false;
     $scope.transitionToView = function(view){
         if(!transitioning){
             transitioning = true;
+            seconds = 1500;
+            if(first) {
+                seconds = 4000;
+                first = false;
+            }
+
             $scope.initialInterval = setInterval(function(){
                 $scope.$apply(function(){
                     $scope.view = null;
                 });
                 clearInterval($scope.initialInterval);
-            }, 2500);
+            }, seconds);
             
             $scope.secondaryInterval = setInterval(function(){
                 $scope.$apply(function(){
@@ -71,7 +78,7 @@ function($scope){
                 });
                 transitioning = false;
                 clearInterval($scope.secondaryInterval);
-            }, 5500);
+            }, seconds + 2000);
         }
     }
 
