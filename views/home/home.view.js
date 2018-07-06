@@ -4,6 +4,7 @@ function($scope){
     
     $scope.preText = '';
     $scope.postText = '';
+    $scope.view = 'quote';
 
     $scope.portfolio =  [
         {
@@ -60,7 +61,7 @@ function($scope){
             transitioning = true;
             seconds = 1500;
             if(first) {
-                seconds = 4000;
+                seconds = 8000;
                 first = false;
             }
 
@@ -74,18 +75,14 @@ function($scope){
             $scope.secondaryInterval = setInterval(function(){
                 $scope.$apply(function(){
                     $scope.view = view;
-                    $scope.showBackButton = true;
                 });
                 transitioning = false;
                 clearInterval($scope.secondaryInterval);
             }, seconds + 2000);
         }
     }
-
-    $scope.showQuote = function(){
-        $scope.transitionToView('quote');
-        $scope.showBackButton = true;
-    }
+    
+    $scope.transitionToView('body');
 
     $scope.quote = {
         body: "Most of the good programmers do programming not because they expect to get paid or get adulation by the public, but because it is fun to program.",
@@ -96,7 +93,6 @@ function($scope){
 
     $scope.abstract = "A global economy warrants a new mode of employment where many individuals pay the wages of a single worker and collectively share the returns. A token provides part of the solution, but the benefits are lost if the token can be arbitrarily inflated by the token owner. Smart contracts on decentralized blockchains provide a solution to the inflation problem by embedding programmable limits into a digital token. As long as the cryptographic properties and incentives of decentralized blockchains hold true the value of each token is safe from theft or tampering by malicious parties. Incentives must be aligned such that the token holders have a vested interest in the success of the token owner and vice versa.";
     
-    $scope.view = 'quote';
-    $scope.transitionToView('body');
+    $scope.community = "Community is a free speech platform for finding the value of your knowledge and opinions using the power of a MeDao. Users buy tokens from people who post valuable insights and sell tokens from people who do not share the same values as the user."
 
 }]);

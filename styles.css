@@ -58,6 +58,10 @@ p {
     background-color: rgb(30, 60, 30)
 }
 
+.bgc-secondary {
+    background-color: rgb(10,10,10); 
+}
+
 .fade.ng-hide {
     opacity: 0;
 }
