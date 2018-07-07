@@ -18,20 +18,80 @@
 </head>
 <body ng-app="app" ng-controller="AppController" ng-cloak>
 
-    <div ng-view></div>
+    <div layout="column" layout-fill>
+
+        <span hide-gt-xs style="position: absolute; top: 5px; right: 5px;">
+            <md-button ng-show="!showLinks" 
+                class="md-icon-button" 
+                aria-label="links" 
+                ng-click="showLinks = true">
+                <i class="material-icons">menu</i>
+            </md-button>
+            <md-button ng-show="showLinks" 
+                class="md-icon-button" 
+                aria-label="links" 
+                ng-click="showLinks = false">
+                <i class="material-icons">arrow_forward</i>
+            </md-button>
+        </span>
+        
+        <div class="bgc-secondary" 
+            style="margin: 0px 0px 64px 0px;"
+            hide-gt-xs
+            ng-show="showLinks"
+            layout="row"
+            layout-align="space-around end"
+            flex="30">
+            <div class="padding" layout="column" layout-align="center center" layout-padding>
+                <div style="color: gray">
+                    Portfolio
+                </div>
+                <a class="lowercase"
+                    ng-repeat="item in app.portfolio"
+                    ng-href="{{item.link}}"
+                    ng-mouseenter="updateHeader(item)"
+                    ng-mouseleave="updateHeader(null)"
+                    target="_blank">
+                    {{item.name}}
+                </a>
+            </div>
+            <div class="padding" layout="column" layout-align="center center" layout-padding>
+                <div style="color: gray">
+                    Contact Me
+                </div>
+                <a class="lowercase"
+                    ng-repeat="item in app.contacts"
+                    ng-href="{{item.link}}"
+                    ng-mouseenter="updateHeader(item)"
+                    ng-mouseleave="updateHeader(null)"
+                    target="_blank">
+                    {{item.name}}
+                </a>
+            </div>
+        </div>
+    
+        <header hide-gt-xs ng-hide="showLinks" data="app"></header>
+        <header hide show-gt-xs data="app"></header>
+        <div layout="row" flex>
+            <sidenav hide show-gt-xs data="app" flex-md="10" flex-lg="30" flex-xl="40"></sidenav>
+            <div layout="column" flex>
+                <content view="app.view"></content>
+            </div>
+        </div>
+    </div>
 
     <!-- Angular Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular-animate.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular-aria.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular-route.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.js"></script>
 
     <!-- Application Files  -->
     <script src="app.js"></script>
-    <script src="app.controller.js"></script>
     
-    <!-- View Controllers -->
-    <script src="views/home/home.view.js"></script>
+    <!-- Directive Controllers -->
+    <script src="directives/sidenav/sidenav.directive.js"></script>
+    <script src="directives/header/header.directive.js"></script>
+    <script src="directives/content/content.directive.js"></script>
 
 </body>
 </html>
